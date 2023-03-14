@@ -14,15 +14,15 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/djangoapp">Best Cars</a>
+        <a class="navbar-brand" href="{% url 'djangoapp:index' %}">Best Cars</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <a class="nav-item nav-link Active" href="/djangoapp">Home <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link" href="/djangoapp/about">About</a>
-            <a class="nav-item nav-link" href="/djangoapp/contact">Contact</a>
+            <a class="nav-item nav-link Active" href="{% url 'djangoapp:index' %}">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="{% url 'djangoapp:about' %}">About</a>
+            <a class="nav-item nav-link" href="{% url 'djangoapp:contact' %}">Contact</a>
             <!--<a class="nav-item nav-link disabled" href="#">Disabled</a>-->
           </div>
         </div>
