@@ -23,7 +23,7 @@ def about(request):
     if request.method == "GET":
         return render(request, 'djangoapp/about.html', context)
 
-# Create a `index` view to return a static contact page
+# Create a `index` view to return a static index page
 def index(request):
     context = {}
     if request.method == "GET":
@@ -45,7 +45,7 @@ def login_request(request):
         # Get username and password from request.POST
         username = request.POST['username']
         password = request.POST['psw']
-        # Try to check if provide credential can be authenticated
+        # Try to check if the provided credential can be authenticated
         user = authenticate(username=username, password=password)
         if user is not None:
             # If user is valid, call login method to login current user
