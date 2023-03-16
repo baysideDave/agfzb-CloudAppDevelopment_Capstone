@@ -25,7 +25,7 @@
                 <form action="{% url 'djangoapp:login' %}"  method="post" class="ml-auto">
                     {% csrf_token %}<!--Important do not touch-->
                     <input class="" type="text" id="username" name="username" placeholder="UserName:">
-                    <input type="password" id="pword" name="pword" placeholder="Password:">
+                    <input type="password" id="psw" name="psw" placeholder="Password:">
                     <input class="btn btn-outline-success btn-sm" type="submit" value="Login">
                     <a class="btn btn-outline-warning btn-sm" type="submit" href="{% url 'djangoapp:registration' %}">Sign Up</a>
                 </form>
@@ -50,9 +50,9 @@
                 <br>
                 <input type="text" placeholder="Enter Last Name: " name="lname" required>
                 <br>
-                <label for="pword"><b>Password</b></label>
+                <label for="psw"><b>Password</b></label>
                 <br>
-                <input type="password" placeholder="Enter Password: " name="pword" required>
+                <input type="password" placeholder="Enter Password: " name="psw" required>
                 <br>
                 <br>
                 <button class="btn btn-warning btn-lg" type="submit">Sign Up</button>

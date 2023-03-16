@@ -42,7 +42,7 @@ def login_request(request):
     context = {}
     # Handles POST request
     if request.method == "POST":
-        # Get username and password from request.POST dictionary
+        # Get username and password from request.POST
         username = request.POST['username']
         password = request.POST['psw']
         # Try to check if provide credential can be authenticated
@@ -64,7 +64,7 @@ def login_request(request):
     # Concat all dealer's short name
     #context["dealership_list"]=dealerships
 #    if request.method == "POST":
-        # Get username and password from request.POST dictionary
+        # Get username and password from request.POST
 #        username = request.POST['username']
  #       password = request.POST['psw']
         # Try to check if provide credential can be authenticated
@@ -105,7 +105,7 @@ def registration_request(request):
     elif request.method == 'POST':
         # Get user information from request.POST
         username = request.POST['username']
-        password = request.POST['pword']
+        password = request.POST['psw']
         first_name = request.POST['fname']
         last_name = request.POST['lname']
         user_exist = False
