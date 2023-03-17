@@ -43,8 +43,8 @@ def login_request(request):
     # Handles POST request
     if request.method == "POST":
         # Get username and password from request.POST
-        username = request.POST['username']
-        password = request.POST['psw']
+        username = request.POST['f1_username']
+        password = request.POST['f1_psw']
         # Try to check if the provided credential can be authenticated
         user = authenticate(username=username, password=password)
         if user is not None:
@@ -105,8 +105,8 @@ def registration_request(request):
     # If it is a POST request
     elif request.method == 'POST':
         # Get user information from request.POST
-        username = request.POST['username']
-        password = request.POST['psw']
+        username = request.POST['r_username']
+        password = request.POST['r_psw']
         first_name = request.POST['fname']
         last_name = request.POST['lname']
         user_exist = False
