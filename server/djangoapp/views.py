@@ -48,11 +48,12 @@ def login_request(request):
         # Try to check if the provided credential can be authenticated
         user = authenticate(username=username, password=password)
         if user is not None:
-            # If user is valid, call login method to login current user
+            # If user is valid, call login method to do actual login
             login(request, user)
             return render(request, 'djangoapp/index.html', context)
         else:
-            # If not, return to login page again
+            #the bad case - tell the user input was bad on the return to login page
+            context["message"]="Username or password is incorrect."
             return render(request, 'djangoapp/index.html', context)
     else:
         return render(request, 'djangoapp/index.html', context)
