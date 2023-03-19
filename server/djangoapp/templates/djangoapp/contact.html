@@ -13,20 +13,51 @@
 
 </head>
     <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="{% url 'djangoapp:index' %}">Best Cars</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
-            <a class="nav-item nav-link" href="{% url 'djangoapp:index' %}">Home</a>
-            <a class="nav-item nav-link" href="{% url 'djangoapp:about' %}">About</a>
-            <a class="nav-item nav-link active" href="{% url 'djangoapp:contact' %}">Contact<span class="sr-only">(current)</span></a>
-            <!--<a class="nav-item nav-link disabled" href="#">Disabled</a>-->
-          </div>
-        </div>
-    </nav>
+        {% if message %}
+        <script>
+            alert('{{ message }}');
+        </script>
+        {%endif%}
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="{% url 'djangoapp:index' %}">Best Cars</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item ">
+                  <a class="nav-link" href="{% url 'djangoapp:index' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'djangoapp:about' %}">About</a>
+                  </li>
+                <li class="nav-item" active>
+                  <a class="nav-link" href="{% url 'djangoapp:contact' %}"  >Contact</a>
+                </li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right ml-auto">
+                {% if user.is_authenticated %}
+                <li>
+                    <a class="btn btn-link" href="#">{{ user.first_name }}({{ user.username }})</a>
+                    <a class="btn btn-link" href="{% url 'djangoapp:logout' %}">Logout</a>
+                </li>
+                {% else %}
+                    <li>
+                        <form class="form-inline" action="{% url 'djangoapp:login' %}" method="post">
+                            {% csrf_token %}
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Enter User Name" name="f1_username" >
+                                <input type="password" class="form-control" placeholder="Enter Password" name="f1_psw" >
+                                <button class="btn btn-primary" type="submit" value="Visitor">Login</button>
+                                <a class="btn btn-link" href="{% url 'djangoapp:registration' %}">Sign Up</a>
+                            </div>
+                        </form>
+                    </li>
+                {% endif %}
+              </ul>
+            </div>
+        </nav>
     <div class="jumbotron">
         <p><h2>Contact Us</h2>
         </p>
