@@ -14,26 +14,27 @@
 </head>
 <html>
     <body>
-        <form  action="{% url 'djangoapp:registration' %}"  method="post">
+        <form  style = "margin-top: 20px" action="{% url 'djangoapp:registration' %}"  method="post">
             <div class="container">
                 {% csrf_token %}
                 <h1>Sign Up</h1>
                 <hr>
                 <div class="form-group">
-                    <label for="username"><b>User Name</b></label>
-                    <input type="text" class="form-control" placeholder="Enter User Name: " name="username" required>
-                    <label for="firstname"><b>First Name</b></label>
-                    <input type="text"  class="form-control" placeholder="Enter First Name: " name="firstname" required>
-                    <label for="lastname"><b>Last Name</b></label>
-                    <input type="text"  class="form-control" placeholder="Enter Last Name: " name="lastname" required>
-                    <label for="psw"><b>Password</b></label>
-                    <input type="password" class="form-control" placeholder="Enter Password: " name="psw" required>
+                    <label for="reg-username"><b>User Name</b></label>
+                    <input type="text" class="form-control" style = "margin-bottom: 14px" placeholder="Enter User Name: " name="reg-username" required>
+                    <label for="reg-firstname"><b>First Name</b></label>
+                    <input type="text"  class="form-control" style = "margin-bottom: 14px" placeholder="Enter First Name: " name="reg-firstname" required>
+                    <label for="reg-lastname"><b>Last Name</b></label>
+                    <input type="text"  class="form-control" style = "margin-bottom: 14px" placeholder="Enter Last Name: " name="reg-lastname" required>
+                    <label for="reg-psw"><b>Password</b></label>
+                    <input type="password" class="form-control" style = "margin-bottom: 14px" placeholder="Enter Password: " name="reg-psw" required>
                     {% if message %}
                         <div class="alert alert-warning">
                             {{ message }}
                         </div>
                     {%endif%}
-                    <button class="btn btn-primqary" type="submit">Sign Up</button>
+                    <hr>
+                    <button class="btn btn-primary" type="submit" style = "margin-top: 8px">Sign Up</button>
                 </div>
             </div>
         </form>

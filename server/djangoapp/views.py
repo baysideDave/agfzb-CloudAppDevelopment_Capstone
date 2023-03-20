@@ -105,10 +105,10 @@ def registration_request(request):
     # If it is a POST request
     elif request.method == 'POST':
         # Get user information from request.POST
-        username = request.POST['username']
-        password = request.POST['psw']
-        first_name = request.POST['firstname']
-        last_name = request.POST['lastname']
+        username = request.POST['reg-username']
+        password = request.POST['reg-psw']
+        first_name = request.POST['reg-firstname']
+        last_name = request.POST['reg-lastname']
         user_exist = False
         try:
             # Check if user already exists
