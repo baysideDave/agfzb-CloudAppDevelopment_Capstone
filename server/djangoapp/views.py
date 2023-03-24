@@ -53,7 +53,7 @@ def login_request(request):
             return render(request, 'djangoapp/index.html', context)
         else:
             #the bad case - tell the user input was bad on the return to login page
-            context["message"]="Username or password is incorrect."
+            context["message"]="The Username or password you entered is incorrect - Please try again"
             return render(request, 'djangoapp/index.html', context)
     else:
         return render(request, 'djangoapp/index.html', context)
