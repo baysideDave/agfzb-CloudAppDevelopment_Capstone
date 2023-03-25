@@ -35,4 +35,4 @@ You must complete all the labs to successfully complete the project.
 1. Add deployment artifacts to your application
 2. Deploy your application
 
-Noted by DG
+Noted by DG -added this text on 3/25

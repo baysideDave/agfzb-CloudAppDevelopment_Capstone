@@ -14,7 +14,7 @@ import json
 logger = logging.getLogger(__name__)
 
 
-# Create your views here.
+# Create your views here.  
 
 
 # Create an `about` view to render a static about page
@@ -125,6 +125,8 @@ def registration_request(request):
         if request.method == "GET":
             return render(request, 'djangoapp/index.html', context)
 
+
+#To be done
 
 # Create a `get_dealer_details` view to render the reviews of a dealer
 # def get_dealer_details(request, dealer_id):
