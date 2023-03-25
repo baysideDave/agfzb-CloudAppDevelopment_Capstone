@@ -53,13 +53,21 @@
           </ul>
         </div>
     </nav>
-
-    <div class="jumbotron">
-        {% if message %}
-        <div class="alert alert-warning">
-            {{ message }}
+    {% if message %}
+    <div class="container-sm">
+        <div class="row">
+            <div class="col-7" >
+            </div>
+            <div class="col-4 alert-danger">
+                {{ message }}
+            </div>
+            <div class="col-1" >
+            </div>
         </div>
-        {%endif%}
+    </div>
+    {%endif%}
+    <div class="jumbotron">
+
         <p><h2>Best Cars</h2>
         </p>
         <p>
