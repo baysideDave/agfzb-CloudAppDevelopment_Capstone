@@ -11,3 +11,7 @@ from django.contrib import admin
 # CarMakeAdmin class with CarModelInline
 
 # Register models here
+from .models import CarMake, CarModel
+
+admin.site.register(CarMake)
+admin.site.register(CarModel)
