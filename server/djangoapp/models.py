@@ -27,7 +27,8 @@ class CarMake(models.Model):
 class CarModel(models.Model):
     #constant for c_type choices
     TYPES = (
-            ("SEDAN", "Sedan"), ("SUV", "SUV"), ("CROSSOVER", "Cross over"), ("HATCHBACK", "Hatchback"), ("OFFROAD", "Off Road")
+            ("SEDAN", "Sedan"), ("SUV", "SUV"), ("CROSSOVER", "Cross over"), ("HATCHBACK", "Hatchback"), \
+            ("OFFROAD", "Off Road"),("ROADSTER","Sports Car")
         )
 
     carmake = models.ForeignKey(CarMake, on_delete=models.CASCADE)
@@ -38,10 +39,10 @@ class CarModel(models.Model):
 
     def __str__(self):
         return "Name: " + self.name + \
-                " Make Name: "+ self.carmake.name + \
+                " Manufacturer: "+ self.carmake.name + \
                 " Type: " + self.car_type + \
                 " Dealer ID: " + str(self.dealer_id)+ \
-                " Year: " + str(self.year)
+                " Model Year: " + str(self.year)
 # <HINT> Create a plain Python class `CarDealer` to hold dealer data
 
 
