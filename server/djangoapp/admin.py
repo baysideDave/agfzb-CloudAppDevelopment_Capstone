@@ -13,5 +13,17 @@ from django.contrib import admin
 # Register models here
 from .models import CarMake, CarModel
 
-admin.site.register(CarMake)
+class CarModelInline(admin.StackedInline):
+
+    list_display = ['name',  'dealer_id', 'car_type', 'year']
+    model = CarModel
+    extra = 5
+
+class CarMakeAdmin(admin.ModelAdmin):
+    inlines = [
+        CarModelInline,
+    ]
+
+# Register models here
+admin.site.register(CarMake, CarMakeAdmin)
 admin.site.register(CarModel)
