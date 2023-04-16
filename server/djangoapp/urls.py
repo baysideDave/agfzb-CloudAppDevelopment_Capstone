@@ -10,7 +10,8 @@ urlpatterns = [
     # name the URL
     
     # path for index view
-    path(route='', view=views.index, name='index'),
+    # path(route='', view=views.index, name='index'),
+    path(route='', view=views.get_dealerships, name='index'),
     # path for about view
     path(route='about/', view=views.about, name='about'),
 
