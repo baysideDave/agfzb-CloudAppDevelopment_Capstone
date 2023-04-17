@@ -85,6 +85,14 @@
         <p>
             <span class="display-4">Our Home Page is Under Construction</span>
         </p>
+
+        {% if context %}
+        
+            <p> context exists</p>        
+        {% else %}
+            <p>No context is available.</p>
+        {% endif %}
+
     </div>
 </body>
 </html>

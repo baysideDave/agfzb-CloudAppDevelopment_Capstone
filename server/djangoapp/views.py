@@ -130,7 +130,8 @@ def registration_request(request):
 def get_dealerships(request):
     if request.method == "GET":
         #url = "your-cloud-function-domain/dealerships/dealer-get"
-        url = "https://us-south.functions.appdomain.cloud/api/v1/web/2b6849a1-8e21-482f-bf2f-f9a9fc3dd9b5/dealership-package/get-dealership"
+        #  mine  url = "https://us-south.functions.appdomain.cloud/api/v1/web/2b6849a1-8e21-482f-bf2f-f9a9fc3dd9b5/dealership-package/get-dealership"
+        url = "https://us-south.functions.appdomain.cloud/api/v1/web/7ccc880f-504c-4f24-a816-b01352454616/dealership-package/get-dealership"
         # Get dealers from the URL
         dealerships = get_dealers_from_cf(url)
         # Concat all dealer's short name
@@ -145,10 +146,11 @@ def get_dealerships(request):
 
         state = request.GET.get("st")
         dealerId = request.GET.get("dealerId")
-        #url = "https://us-south.functions.appdomain.cloud/api/v1/web/7ccc880f-504c-4f24-a816-b01352454616/dealership-package/get-dealership"
+        #their url
+        url = "https://us-south.functions.appdomain.cloud/api/v1/web/7ccc880f-504c-4f24-a816-b01352454616/dealership-package/get-dealership"
 
         # url below is mine
-        url =  "https://us-south.functions.appdomain.cloud/api/v1/web/2b6849a1-8e21-482f-bf2f-f9a9fc3dd9b5/dealership-package/get-dealership"
+        #url =  "https://us-south.functions.appdomain.cloud/api/v1/web/2b6849a1-8e21-482f-bf2f-f9a9fc3dd9b5/dealership-package/get-dealership"
 
         try:
             if state:
@@ -161,11 +163,14 @@ def get_dealerships(request):
             # Handle the error and set dealerships to an empty list or display an error message
             dealerships = []
             context["error"] = f"An error occurred while fetching dealerships: {e}"
-
+            #my code
+            dealer_names = ' '.join([dealer.short_name for dealer in dealerships])
         context["dealership_list"] = dealerships
         print(context["dealership_list"])
-
+        
+        
         return render(request, "djangoapp/index.html", context=context)
+
 
 
 #To be done
