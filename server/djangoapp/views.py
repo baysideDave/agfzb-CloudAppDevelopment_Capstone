@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, render, redirect
 # from .models import related models
 from .restapis import *
+from .restapis import get_request, get_dealers_from_cf
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from datetime import datetime
@@ -120,6 +121,16 @@ def registration_request(request):
 
 
 # Update the `get_dealerships` view to render the index page with a list of dealerships
+
+def get_dealerships(request):
+    if request.method == "GET":
+        url = "https://us-south.functions.appdomain.cloud/api/v1/web/2b6849a1-8e21-482f-bf2f-f9a9fc3dd9b5/dealership-package/dealership"
+        # Get dealers from the URL
+        dealerships = get_dealers_from_cf(url)
+        # Concat all dealer's short name
+        dealer_names = ' '.join([dealer.short_name for dealer in dealerships])
+        # Return a list of dealer short name
+        return HttpResponse(dealer_names)
 """
     def get_dealerships(request):
         context = {}
@@ -139,7 +150,7 @@ def get_dealerships(request):
         # Return a list of dealer short name
         return HttpResponse(dealer_names)
 """
-
+"""
 def get_dealerships(request):
     if request.method == "GET":
         context = {}
@@ -171,7 +182,7 @@ def get_dealerships(request):
         
         return render(request, "djangoapp/index.html", context=context)
 
-
+"""
 
 #To be done
 
