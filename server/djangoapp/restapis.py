@@ -1,4 +1,4 @@
-import requests
+gitimport requests
 import json
 from .models import CarDealer
 from requests.auth import HTTPBasicAuth
