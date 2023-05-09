@@ -1,4 +1,4 @@
-gitimport requests
+import requests
 import json
 from .models import CarDealer
 from requests.auth import HTTPBasicAuth
@@ -50,9 +50,13 @@ def get_dealers_from_cf(url, **kwargs):
     results = []
     # Call get_request with a URL parameter
     json_result = get_request(url)
+    print("json_result", json_result[2])
     if json_result:
         # Get the row list in JSON as dealers
+        """
         dealers = json_result["rows"]
+        """
+        dealers = json_result["body"]["doc"]
         # For each dealer object
         for dealer in dealers:
             # Get its content in `doc` object
