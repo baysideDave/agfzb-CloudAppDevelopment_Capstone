@@ -87,6 +87,7 @@ def get_dealer_reviews_from_cf(url, dealer_id):
         reviews = json_result["entries"]
         """
         reviews = json_result["data"]["docs"]
+        print("reviews = ", reviews)
         # For each review object
         for review in reviews:
             review_obj = DealerReview(
@@ -101,8 +102,9 @@ def get_dealer_reviews_from_cf(url, dealer_id):
                 sentiment=analyze_review_sentiments(review["review"]),
                 id=review['id']
                 )
+            #print(review_obj)
             results.append(review_obj)
-    print(results[0])
+    
     return results
 
 
