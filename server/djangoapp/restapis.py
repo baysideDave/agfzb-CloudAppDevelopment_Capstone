@@ -73,51 +73,49 @@ def get_dealers_from_cf(url, **kwargs):
 
     return results
 
-
-# Gets all of the reviews for a specified dealer from the Cloudant DB
-# Uses a web action to get_reviews
+# Create a get_dealer_reviews_from_cf method to get reviews by dealer id from a cloud function
+# def get_dealer_by_id_from_cf(url, dealerId):
+# - Call get_request() with specified arguments
+# - Parse JSON results into a DealerView object list
 def get_dealer_reviews_from_cf(url, dealer_id):
     results = []
-    # Perform a GET request with the specified dealer id
+    # Call get_request with a URL parameter
     json_result = get_request(url, dealerId=dealer_id)
-
-    if json_result:
-        # Get all review data from the response
-        reviews = json_result["body"]["data"]["docs"]
-        # For every review in the response
+    
+    if "entries" in json_result:
+        reviews = json_result["entries"]
+        # For each review object
         for review in reviews:
-            # Create a DealerReview object from the data
-            # These values must be present
-            review_content = review["review"]
-            id = review["_id"]
-            name = review["name"]
-            purchase = review["purchase"]
-            dealership = review["dealership"]
-
-            try:
-                # These values may be missing
-                car_make = review["car_make"]
-                car_model = review["car_model"]
-                car_year = review["car_year"]
-                purchase_date = review["purchase_date"]
-
-                # Creating a review object
-                review_obj = DealerReview(dealership=dealership, id=id, name=name, 
-                                          purchase=purchase, review=review_content, car_make=car_make, 
-                                          car_model=car_model, car_year=car_year, purchase_date=purchase_date
-                                          )
-
-            except KeyError:
-                print("Something is missing from this review. Using default values.")
-                # Creating a review object with some default values
-                review_obj = DealerReview(
-                    dealership=dealership, id=id, name=name, purchase=purchase, review=review_content)
-
-            # Analysing the sentiment of the review object's review text and saving it to the object attribute "sentiment"
-            review_obj.sentiment = analyze_review_sentiments(review_obj.review)
-            print(f"sentiment: {review_obj.sentiment}")
-
-            # Saving the review object to the list of results
+            review_obj = DealerReview(
+                dealership=review["dealership"],
+                name=review["name"],
+                purchase=review["purchase"],
+                review=review["review"],
+                purchase_date=review["purchase_date"],
+                car_make=review["car_make"],
+                car_model=review["car_model"],
+                car_year=review["car_year"],
+                sentiment=analyze_review_sentiments(review["review"]),
+                id=review['id']
+                )
             results.append(review_obj)
-
+    #print(results[0])
     return results
+
+
+# Create an `analyze_review_sentiments` method to call Watson NLU and analyze text
+# def analyze_review_sentiments(text):
+# - Call get_request() with specified arguments
+# - Get the returned sentiment label such as Positive or Negative
+def analyze_review_sentiments(dealerreview, **kwargs):
+    API_KEY="qHY59TRRsW6rPG4a-SP2pia-shPdmi6TFhdKAY6ktUyY"
+    NLU_URL='https://apikey-v2-yz8ut2q5yrvryc6zbtf7reuqm3ipkj2ul3tuy5yb23l:38032cd4ca78af7bc552eb9f07a9c0f9@41165407-fde5-4d7f-9595-a7ccd5c0c021-bluemix.cloudantnosqldb.appdomain.cloud'
+    params = json.dumps({"text": dealerreview, "features": {"sentiment": {}}})
+    response = requests.post(NLU_URL,data=params,headers={'Content-Type':'application/json'},auth=HTTPBasicAuth("apikey", API_KEY))
+    
+    #print(response.json())
+    try:
+        sentiment=response.json()['sentiment']['document']['label']
+        return sentiment
+    except:
+        return "neutral"
