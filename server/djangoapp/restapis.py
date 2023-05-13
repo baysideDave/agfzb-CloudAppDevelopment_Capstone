@@ -81,16 +81,27 @@ def get_dealer_reviews_from_cf(url, dealer_id):
     results = []
     # Call get_request with a URL parameter
     json_result = get_request(url, dealerId=dealer_id)
-    
-    if "entries" in json_result:
+    #print("after json_result\n")
+    abc =  json_result
+    print("abc type is ",type(abc))
+    print(json_result)
+    #reviewsObject = json.loads(json_result)
+    #print("reviewObject = ", reviewsObject)
+    defg = json_result["data"]["docs"][0]
+    print("defg = ", defg)
+    # dsg  if "entries" in json_result:
+    if "data" in json_result:
         """
         reviews = json_result["entries"]
         """
         reviews = json_result["data"]["docs"]
         print("reviews = ", reviews)
+        #pprint(reviews)
         # For each review object
         for review in reviews:
-            review_obj = DealerReview(
+            print("in loop")
+            # dsg  review_obj = DealerReview(
+            review_obj = review(
                 dealership=review["dealership"],
                 name=review["name"],
                 purchase=review["purchase"],
@@ -104,7 +115,7 @@ def get_dealer_reviews_from_cf(url, dealer_id):
                 )
             #print(review_obj)
             results.append(review_obj)
-    
+    print("about to return results from get_dealer_reviews_from_cf\n")
     return results
 
 
