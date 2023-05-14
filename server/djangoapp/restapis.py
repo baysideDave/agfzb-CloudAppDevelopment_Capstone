@@ -50,10 +50,7 @@ def get_dealers_from_cf(url, **kwargs):
     results = []
     # Call get_request with a URL parameter
     json_result = get_request(url)
-    """
-    for q in json_result
-        print("json_result", json_result[q]["doc"]["city"])
-    """
+
     if json_result:
         # Get the row list in JSON as dealers
         """
@@ -142,8 +139,12 @@ def get_dealer_reviews_from_cf(url, dealer_id):
 # - Call get_request() with specified arguments
 # - Get the returned sentiment label such as Positive or Negative
 def analyze_review_sentiments(dealerreview, **kwargs):
+    """
     API_KEY="qHY59TRRsW6rPG4a-SP2pia-shPdmi6TFhdKAY6ktUyY"
     NLU_URL='https://apikey-v2-yz8ut2q5yrvryc6zbtf7reuqm3ipkj2ul3tuy5yb23l:38032cd4ca78af7bc552eb9f07a9c0f9@41165407-fde5-4d7f-9595-a7ccd5c0c021-bluemix.cloudantnosqldb.appdomain.cloud'
+    """
+    API_KEY="Q6IXbvxID5wGi1luZPYYNglcc5_Opdy5bBkQUzq1z8xb"
+    NLU_URL='https://api.us-south.natural-language-understanding.watson.cloud.ibm.com/instances/5a357be0-0b26-42cb-94f2-6024286a5e18'
     params = json.dumps({"text": dealerreview, "features": {"sentiment": {}}})
     response = requests.post(NLU_URL,data=params,headers={'Content-Type':'application/json'},auth=HTTPBasicAuth("apikey", API_KEY))
     
