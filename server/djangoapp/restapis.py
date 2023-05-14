@@ -1,6 +1,6 @@
 import requests
 import json
-from .models import CarDealer
+from .models import CarDealer, DealerReview
 from requests.auth import HTTPBasicAuth
 
 
@@ -77,6 +77,25 @@ def get_dealers_from_cf(url, **kwargs):
 # def get_dealer_by_id_from_cf(url, dealerId):
 # - Call get_request() with specified arguments
 # - Parse JSON results into a DealerView object list
+"""
+class DealerReview:
+
+    def __init__(self, dealership, name, purchase, review, purchase_date, car_make, car_model, car_year,sentiment, id):
+        self.dealership=dealership
+        self.name=name
+        self.purchase=purchase
+        self.review=review
+        self.purchase_date=purchase_date
+        self.car_make=car_make
+        self.car_model=car_model
+        self.car_year=car_year
+        self.sentiment=sentiment #from Watson NLU - will be positive, neutral, or negative.
+        self.id=id
+
+    def __str__(self):
+        return "Review: " + self.review +\
+                " Sentiment: " + self.sentiment
+"""
 def get_dealer_reviews_from_cf(url, dealer_id):
     results = []
     # Call get_request with a URL parameter
@@ -100,8 +119,7 @@ def get_dealer_reviews_from_cf(url, dealer_id):
         # For each review object
         for review in reviews:
             print("in loop")
-            # dsg  review_obj = DealerReview(
-            review_obj = review(
+            review_obj = DealerReview(
                 dealership=review["dealership"],
                 name=review["name"],
                 purchase=review["purchase"],
@@ -113,9 +131,9 @@ def get_dealer_reviews_from_cf(url, dealer_id):
                 sentiment=analyze_review_sentiments(review["review"]),
                 id=review['id']
                 )
-            #print(review_obj)
+            print(review_obj)
             results.append(review_obj)
-    print("about to return results from get_dealer_reviews_from_cf\n")
+        print("about to return results from get_dealer_reviews_from_cf\n")
     return results
 
 
