@@ -193,7 +193,7 @@ def get_dealerships(request):
 def get_dealer_details(request, dealer_id):
     context={}
     url = "https://us-south.functions.appdomain.cloud/api/v1/web/2b6849a1-8e21-482f-bf2f-f9a9fc3dd9b5/dealership-package/review"
-    apikey="ine8ayzn6rB1B9IvupRezkDivaDmiyLRgMMhHzATugXriSBa6"
+    apikey="<cloudant key goes here>"
     # dsg print("dealer is ",dealer_id)
     # Get dealers from the URL
     dealer_details = get_dealer_reviews_from_cf(url,dealer_id)
