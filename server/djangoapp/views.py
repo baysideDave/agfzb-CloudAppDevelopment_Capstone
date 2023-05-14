@@ -10,6 +10,7 @@ from django.contrib import messages
 from datetime import datetime
 import logging
 import json
+import sys, os
 
 # Getting a logger instance
 logger = logging.getLogger(__name__)
@@ -193,7 +194,12 @@ def get_dealerships(request):
 def get_dealer_details(request, dealer_id):
     context={}
     url = "https://us-south.functions.appdomain.cloud/api/v1/web/2b6849a1-8e21-482f-bf2f-f9a9fc3dd9b5/dealership-package/review"
-    apikey="<cloudant key goes here>"
+    #   apikey="<cloudant key goes here>"
+    #
+    # be sure to set up environmental value on the os level - see next line
+    # export APIKEY=<your value goes here, without the angle brackets>
+    apikey = os.environ.get('APIKEY')
+
     # dsg print("dealer is ",dealer_id)
     # Get dealers from the URL
     dealer_details = get_dealer_reviews_from_cf(url,dealer_id)
