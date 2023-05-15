@@ -4,7 +4,7 @@ import sys, os
 from .models import CarDealer, DealerReview
 from requests.auth import HTTPBasicAuth
 
-
+# this function is used to make get requests
 def get_request(url, **kwargs):
     print(kwargs)
     print("GET from {} ".format(url))
@@ -19,6 +19,18 @@ def get_request(url, **kwargs):
     print("With status {} ".format(status_code))
     json_data = json.loads(response.text)
     return json_data
+
+# This function is used make HTTP POST requests
+def post_request(url, json_payload, **kwargs):
+    print(f"POST to {url}")
+    try:
+        response = requests.post(url, params=kwargs, json=json_payload)
+    except:
+        print("ERROR occurred while making POST request. ")
+    status_code = response.status_code
+    print("With status {} ".format(status_code))
+
+    return response
 
 """
 # Create a get_dealers_from_cf method to get dealers from a cloud function
