@@ -213,15 +213,17 @@ def get_dealer_details(request, dealer_id):
     # Get dealers from the URL
     dealer_details = get_dealer_reviews_from_cf(url,dealer_id)
     print("back in view dealer_details =",dealer_details)
-    """  use this when we go to templates
+    
     context["dealer_id"]=dealer_id
     context["reviews"]=dealer_details
-    return render(request, 'djangoapp/dealer_details.html', context)
-    """
-    # Concat all reviewers names
-    reviewer_names = ' '.join([reviewer.name for reviewer in dealer_details])
+    
+
+    # Concat all reviewers names - old test code
+    #reviewer_names = ' '.join([reviewer.name for reviewer in dealer_details])
     # Return a list of reviewer names
-    return HttpResponse(reviewer_names)
+    #return HttpResponse(reviewer_names)
+
+    return render(request, 'djangoapp/dealer_details.html', context)
 
 
 # Create a `add_review` view to submit a review
