@@ -83,7 +83,7 @@
     </div>
     -->
 
-    <table class="table" id="table">
+    <table class="table" id="table" data-filter-control="true">
         <thead>
             <tr>
                 <th data-field="id">ID</th>
@@ -108,4 +108,9 @@
         </tbody>
     </table>
 </body>
+<script>
+    $(function() {
+      $('#table').bootstrapTable()
+    })
+  </script>
 </html>
