@@ -78,21 +78,46 @@
         </div>
     </div>
     {%endif%}
-    <div class="jumbotron">
 
+    <!-- old test code
+    <div class="jumbotron">
         <p><h2>Best Cars</h2>
         </p>
         <p>
             <span class="display-4">Our Home Page is Under Construction</span>
         </p>
-
-        {% if context %}
-        
+        {% if context %}       
             <p> context exists</p>        
         {% else %}
             <p>No context is available.</p>
         {% endif %}
-
     </div>
+    -->
+
+    <table class="table" id="table">
+        <thead>
+            <tr>
+                <th data-field="id">ID</th>
+                <td>{{dealer.id}}</td>
+                <th data-field="full_name">Dealership Name</th>
+                <th data-field="city">City</th>
+                <th data-field="address">Address</th>
+                <th data-field="zip">ZIP Code</th>
+                <th data-field="state" data-filter-control="select">State</th>                
+            </tr>
+        </thead>
+        <tbody>
+            {% for dealer in dealership_list %}
+            <tr>
+                <td>{{dealer.id}}</td>
+                <td><a href="{% url 'djangoapp:dealer_details' dealer.id %}">{{dealer.full_name}}</a></td>
+                <td>{{dealer.city}}</td>
+                <td>{{dealer.address}}</td>
+                <td>{{dealer.zip}}</td>
+                <td>{{dealer.st}}</td>         
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>
