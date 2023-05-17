@@ -129,8 +129,9 @@ def get_dealerships(request):
         url = "https://us-south.functions.appdomain.cloud/api/v1/web/2b6849a1-8e21-482f-bf2f-f9a9fc3dd9b5/dealership-package/dealership"
         # Get the dealers calling a function that will use a web action
         dealerships = get_dealers_from_cf(url)
+        print("dealers form cf = ", dealerships[2])
         # add the returned data to context
-        context["dealerships"] = dealerships
+        context["dealership_list"] = dealerships
 
         # old test code
         # Concat all dealer's short name
