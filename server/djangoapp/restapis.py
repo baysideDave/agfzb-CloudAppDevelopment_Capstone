@@ -120,15 +120,12 @@ def get_dealer_reviews_from_cf(url, dealer_id):
     #print("defg = ", defg)
     # dsg  if "entries" in json_result:
     if "data" in json_result:
-        """
-        reviews = json_result["entries"]
-        """
+        
         reviews = json_result["data"]["docs"]
         print("reviews = ", reviews)
-        #pprint(reviews)
         # For each review object
         for review in reviews:
-            print("in loop")
+            print("in reviews loop")
             review_obj = DealerReview(
                 dealership=review["dealership"],
                 name=review["name"],
@@ -141,7 +138,7 @@ def get_dealer_reviews_from_cf(url, dealer_id):
                 sentiment=analyze_review_sentiments(review["review"]),
                 id=review['id']
                 )
-            print(review_obj)
+            print("review object = ", review_obj)
             results.append(review_obj)
         print("about to return results from get_dealer_reviews_from_cf\n")
     return results
