@@ -3,6 +3,7 @@ import json
 import sys, os
 from .models import CarDealer, DealerReview
 from requests.auth import HTTPBasicAuth
+from pprint import pprint
 
 # this function is used to make get requests
 def get_request(url, **kwargs):
@@ -140,7 +141,9 @@ def get_dealer_reviews_from_cf(url, dealer_id):
                 )
             print("review object = ", review_obj)
             results.append(review_obj)
-        print("about to return results from get_dealer_reviews_from_cf\n")
+            pprint(results)
+
+    print("about to return results from get_dealer_reviews_from_cf\n")
     return results
 
 

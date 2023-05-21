@@ -11,6 +11,7 @@ from datetime import datetime
 import logging
 import json
 import sys, os
+from pprint import pprint
 
 # Getting a logger instance
 logger = logging.getLogger(__name__)
@@ -213,6 +214,7 @@ def get_dealer_details(request, dealer_id):
     # Get dealers from the URL
     dealer_details = get_dealer_reviews_from_cf(url,dealer_id)
     print("back in view dealer_details =",dealer_details)
+    pprint(dealer_details)
     
     context["dealer_id"]=dealer_id
     context["reviews"]=dealer_details
