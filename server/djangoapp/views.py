@@ -212,12 +212,12 @@ def get_dealer_details(request, dealer_id):
 
     # dsg print("dealer is ",dealer_id)
     # Get dealers from the URL
-    dealer_details = get_dealer_reviews_from_cf(url,dealer_id)
-    print("back in view dealer_details =",dealer_details)
-    pprint(dealer_details)
+    reviews = get_dealer_reviews_from_cf(url,dealer_id)
+    print("back in get_dealer_details: reviews = ", reviews)
+    pprint(reviews)
     
     context["dealer_id"]=dealer_id
-    context["reviews"]=dealer_details
+    context["reviews"]=reviews
     
 
     # Concat all reviewers names - old test code
