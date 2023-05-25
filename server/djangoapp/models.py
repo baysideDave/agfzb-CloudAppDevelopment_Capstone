@@ -80,6 +80,7 @@ class DealerReview:
         self.name=name
         self.purchase=purchase
         self.review=review
+        self.purchase
         self.purchase_date=purchase_date
         self.car_make=car_make
         self.car_model=car_model

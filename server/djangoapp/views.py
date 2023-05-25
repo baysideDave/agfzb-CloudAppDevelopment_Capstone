@@ -213,8 +213,8 @@ def get_dealer_details(request, dealer_id):
     # dsg print("dealer is ",dealer_id)
     # Get dealers from the URL
     reviews = get_dealer_reviews_from_cf(url,dealer_id)
-    print("back in get_dealer_details: reviews = ", reviews)
-    pprint(reviews)
+    print("back in get_dealer_details: reviews = ", reviews[0])
+    pprint(reviews[0])
     
     context["dealer_id"]=dealer_id
     context["reviews"]=reviews

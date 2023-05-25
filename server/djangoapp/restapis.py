@@ -160,7 +160,7 @@ def analyze_review_sentiments(dealerreview, **kwargs):
     params = json.dumps({"text": dealerreview, "features": {"sentiment": {}}})
     response = requests.post(NLU_URL,data=params,headers={'Content-Type':'application/json'},auth=HTTPBasicAuth("apikey", NLUKEY))
     
-    #print(response.json())
+    print(response.json())
     try:
         sentiment=response.json()['sentiment']['document']['label']
         return sentiment
