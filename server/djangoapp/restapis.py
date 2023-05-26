@@ -156,8 +156,8 @@ def get_dealer_name_by_id_from_cf(url, dealerId):
     json_result = get_request(url, dealerId=dealerId)
 
     # Create a CarDealer object from response
-    dealer = json_result[0]
-
+    dealer = json_result[0]["full_name"]
+    print("in get_dealer_name_by_id_from_cf, full_name = ", dealer)
     """
     print("in get_dealer_name_by_id_from_cf: dealer = " , dealer)
     dealer_obj = CarDealer(address=dealer["address"], city=dealer["city"], full_name=dealer["full_name"],
