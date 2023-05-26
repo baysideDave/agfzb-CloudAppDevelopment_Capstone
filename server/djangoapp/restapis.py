@@ -4,6 +4,9 @@ import sys, os
 from .models import CarDealer, DealerReview
 from requests.auth import HTTPBasicAuth
 from pprint import pprint
+from ibm_watson import NaturalLanguageUnderstandingV1
+from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
+from ibm_watson.natural_language_understanding_v1 import Features, SentimentOptions
 
 # this function is used to make get requests
 def get_request(url, **kwargs):
@@ -151,12 +154,50 @@ def get_dealer_reviews_from_cf(url, dealer_id):
 # def analyze_review_sentiments(text):
 # - Call get_request() with specified arguments
 # - Get the returned sentiment label such as Positive or Negative
+def analyze_review_sentiments(review_text):
+    # Watson NLU configuration
+    """  this stuff is for real instalation
+    try:
+        if os.environ['env_type'] == 'PRODUCTION':
+            url = os.environ['WATSON_NLU_URL']
+            api_key = os.environ["WATSON_NLU_API_KEY"]
+    except KeyError:
+        url = config('WATSON_NLU_URL')
+        api_key = config('WATSON_NLU_API_KEY')
+    """
+    #using os.envirol for local usage
+    api_key = os.environ['NLUKEY']
+    url = os.environ['NLU_URL']
+
+    version = '2021-08-01'
+    authenticator = IAMAuthenticator(api_key)
+    nlu = NaturalLanguageUnderstandingV1(
+        version=version, authenticator=authenticator)
+    nlu.set_service_url(url)
+
+    # tyis is where we get the sentiment of the review from NLU
+    try:
+        response = nlu.analyze(text=review_text, features=Features(
+            sentiment=SentimentOptions())).get_result()
+        print(json.dumps(response))
+
+        sentiment_label = response["sentiment"]["document"]["label"]
+    except:
+        print("text is too short for meaningful analysis, so we will sentiment value to 'neutral' ")
+        sentiment_label = "neutral"
+
+
+    print(sentiment_label) # debug
+
+    return sentiment_label
+
+"""
 def analyze_review_sentiments(dealerreview, **kwargs):
 
     #API_KEY="<NLU key goes here>"
     # actually using the key from IBM NLU
-    NLUKEY = os.environ['NLUKEY']
-    NLU_URL='https://api.us-south.natural-language-understanding.watson.cloud.ibm.com/instances/5a357be0-0b26-42cb-94f2-6024286a5e18'
+   NLUKEY = os.environ['NLUKEY']
+    NLU_URL='https://api.us- south.natural-language-understanding.watson.cloud.ibm.com/instances/5a357be0-0b26-42cb-94f2-6024286a5e18'
     params = json.dumps({"text": dealerreview, "features": {"sentiment": {}}})
     response = requests.post(NLU_URL,data=params,headers={'Content-Type':'application/json'},auth=HTTPBasicAuth("apikey", NLUKEY))
     
@@ -166,3 +207,4 @@ def analyze_review_sentiments(dealerreview, **kwargs):
         return sentiment
     except:
         return "neutral"
+"""

@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, render, redirect
 # from .models import related models
+from .models import CarModel
 from .restapis import *
 from .restapis import get_request, get_dealers_from_cf
 from django.contrib.auth import login, logout, authenticate
@@ -213,8 +214,8 @@ def get_dealer_details(request, dealer_id):
     # dsg print("dealer is ",dealer_id)
     # Get dealers from the URL
     reviews = get_dealer_reviews_from_cf(url,dealer_id)
-    print("back in get_dealer_details: reviews = ", reviews[0])
-    pprint(reviews[0])
+    #print("back in get_dealer_details: reviews = ", reviews[0])
+    #pprint(reviews[0])
     
     context["dealer_id"]=dealer_id
     context["reviews"]=reviews
