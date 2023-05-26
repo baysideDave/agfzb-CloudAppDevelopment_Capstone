@@ -204,16 +204,22 @@ def get_dealerships(request):
 #...
 def get_dealer_details(request, dealer_id):
     context={}
-    url = "https://us-south.functions.appdomain.cloud/api/v1/web/2b6849a1-8e21-482f-bf2f-f9a9fc3dd9b5/dealership-package/review"
+    reviews_url = "https://us-south.functions.appdomain.cloud/api/v1/web/2b6849a1-8e21-482f-bf2f-f9a9fc3dd9b5/dealership-package/review"
+    dealer_name_url = "https://us-south.functions.appdomain.cloud/api/v1/web/2b6849a1-8e21-482f-bf2f-f9a9fc3dd9b5/dealership-package/dealership"
     #   apikey="<cloudant key goes here>"
     #
     # be sure to set up environmental value on the os level - see next line
     # export APIKEY=<your value goes here, without the angle brackets>
     apikey = os.environ.get('APIKEY')
 
+    # getting the dealer name
+    dealer_name = get_dealer_name_by_id_from_cf(dealer_name_url, dealerId=dealer_id)
+    print("dealer name is: ", dealer_name)
+    context["dealer_name"] = dealer_name
+
     # dsg print("dealer is ",dealer_id)
     # Get dealers from the URL
-    reviews = get_dealer_reviews_from_cf(url,dealer_id)
+    reviews = get_dealer_reviews_from_cf(reviews_url,dealer_id)
     #print("back in get_dealer_details: reviews = ", reviews[0])
     #pprint(reviews[0])
     
