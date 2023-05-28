@@ -70,14 +70,18 @@
     </div>
     {%endif%}
     <!--done with navbar issues, new content code starts here -->
+    <!--
     {% if user.is_authenticated %}
         <div style="margin: 10px;">
             <a class="btn btn-primary" href="{% url 'djangoapp:add_review' dealer_id %}"><b>Write a car review</b></a>
         </div>
 
     {% endif %}
-    <h2> {{ dealer_name }} </h2>
-    <div class="card-columns">
+    -->
+    <div style="margin: 0 0 0 20px">
+        <p style=" font-size: x-large" >Reviews for <b>{{ dealer_name }}</b> </p>
+    </div>
+    <div class="card-columns" style="margin:50px">
         {% for review in reviews %}
             {% if review.purchase %}
             <div class="card" style="height: 300px; overflow: scroll; overflow-x: hidden;">
