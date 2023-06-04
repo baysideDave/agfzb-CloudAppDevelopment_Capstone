@@ -36,12 +36,13 @@
           </ul>
           <ul class="nav navbar-nav navbar-right ml-auto">
             {% if user.is_authenticated %}
-            <li>
-                <a class="btn btn-link" href="#">add new review</a>                
+            <li>             
+              <!--  <a class="btn btn-link" href="ibm.com">add new review</a> -->
+              
                 <a class="btn btn-link" href="#">{{ user.first_name }}({{ user.username }})</a>
                 <a class="btn btn-link" href="{% url 'djangoapp:logout' %}">Logout</a>
             </li>
-            {% else %}
+            {% else %}           
                 <li>
                     <form class="form-inline" action="{% url 'djangoapp:login' %}" method="post">
                         {% csrf_token %}
@@ -53,7 +54,7 @@
                         </div>
                     </form>
                 </li>
-            {% endif %}
+            {% endif %}            
           </ul>
         </div>
     </nav>
@@ -71,14 +72,8 @@
     </div>
     {%endif%}
     <!--done with navbar issues, new content code starts here -->
-    <!--
-    {% if user.is_authenticated %}
-        <div style="margin: 10px;">
-            <a class="btn btn-primary" href="{% url 'djangoapp:add_review' dealer_id %}"><b>Write a car review</b></a>
-        </div>
+    
 
-    {% endif %}
-    -->
     <div style="margin: 0 0 0 20px">
         <p style=" font-size: x-large" >Reviews for <b>{{ dealer_name }}</b> </p>
     </div>
