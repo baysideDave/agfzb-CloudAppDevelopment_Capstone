@@ -240,17 +240,20 @@ def get_dealer_details(request, dealer_id):
 # ...
 
 # View to submit a new review
-def add_review(request, dealer_id):
+#def add_review(request, dealer_id):
+def add_review(request):
+    context={}
     # User must be logged in before posting a review
     if request.user.is_authenticated:
         # GET request renders the page with the form for filling out a review
         if request.method == "GET":
-            url = f"https://us-south.functions.appdomain.cloud/api/v1/web/2b6849a1-8e21-482f-bf2f-f9a9fc3dd9b5/dealership-package/dealership?dealerId={dealer_id}"
+            dealer_id = 7
+            url = "https://us-south.functions.appdomain.cloud/api/v1/web/2b6849a1-8e21-482f-bf2f-f9a9fc3dd9b5/dealership-package/dealership"
 
             # Get dealer details from the API
             context = {
                 "cars": CarModel.objects.all(),
-                "dealer": get_dealer_by_id(url, dealer_id=dealer_id),
+                "dealer": get_dealer_name_by_id_from_cf(url, dealerId=dealer_id),
             }
             return render(request, 'djangoapp/add_review.html', context)
 

@@ -77,6 +77,19 @@
     <div style="margin: 0 0 0 20px">
         <p style=" font-size: x-large" >Reviews for <b>{{ dealer_name }}</b> </p>
     </div>
+    <h4>see this?</h4>
+
+<h4>The form method="get" attribute</h4>
+
+<form action=" {% url 'djangoapp:dgxyz'  %}dealer_id=7" method="get" target="_blank">
+  <label for="fname">First name:</label>
+  <input type="text" id="fname" name="fname"><br><br>
+  <label for="lname">Last name:</label>
+  <input type="text" id="lname" name="lname"><br><br>
+  <input type="submit" value="Submit">
+</form>
+
+<p>Click on the submit button, and the input will be sent to a page on the server called "action_page.php".</p>
     <div class="card-columns" style="margin:50px">
         {% for review in reviews %}
             {% if review.purchase %}
