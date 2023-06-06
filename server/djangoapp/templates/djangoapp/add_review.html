@@ -14,7 +14,8 @@
         <div class="container">
             <h2>Input a New Review</h2>
             <h3>{{dealer.full_name}}</h3>
-            <form action="/djangoapp/dealer/{{dealer.id}}/add-review/" method="post">
+            #<form action="/djangoapp/dealer/{{dealer.id}}/add_review/" method="post">
+            <form action="/djangoapp/dealer/7/add_review/" method="post">
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="content"><b>Enter the review content:</b></label>

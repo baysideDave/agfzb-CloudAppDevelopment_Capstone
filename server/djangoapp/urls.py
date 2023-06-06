@@ -39,7 +39,7 @@ urlpatterns = [
     #path(route='add_review/<int:dealer_id>/', view=views.add_review, name="add_review"),
 
     #re_path(r'^add_review/',   view=views.add_review, name="dgxyz"),
-    path(route='dealer/<int:dealer_id>/add-review/', view=views.add_review, name="add_review"),
+    path(route='dealer/<int:dealer_id>/add_review/', view=views.add_review, name="add_review"),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
