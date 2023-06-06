@@ -73,23 +73,19 @@
     {%endif%}
     <!--done with navbar issues, new content code starts here -->
     
-
     <div style="margin: 0 0 0 20px">
         <p style=" font-size: x-large" >Reviews for <b>{{ dealer_name }}</b> </p>
     </div>
     <h4>see this?</h4>
 
-<h4>The form method="get" attribute</h4>
+{% if user.is_authenticated %}
+<div style="margin: 10px;">
+    <a class="btn btn-primary" href="{% url 'djangoapp:add_review' dealer_id %}"><b>Write a car review</b></a>
+</div>
+{% endif %}
 
-<form action=" {% url 'djangoapp:dgxyz'  %}dealer_id=7" method="get" target="_blank">
-  <label for="fname">First name:</label>
-  <input type="text" id="fname" name="fname"><br><br>
-  <label for="lname">Last name:</label>
-  <input type="text" id="lname" name="lname"><br><br>
-  <input type="submit" value="Submit">
-</form>
+<div class="card-columns">
 
-<p>Click on the submit button, and the input will be sent to a page on the server called "action_page.php".</p>
     <div class="card-columns" style="margin:50px">
         {% for review in reviews %}
             {% if review.purchase %}

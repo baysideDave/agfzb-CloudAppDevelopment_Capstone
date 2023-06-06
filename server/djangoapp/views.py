@@ -241,7 +241,7 @@ def get_dealer_details(request, dealer_id):
 
 # View to submit a new review
 #def add_review(request, dealer_id):
-def add_review(request):
+def add_review(request, dealer_id):
     context={}
     # User must be logged in before posting a review
     if request.user.is_authenticated:
@@ -278,7 +278,7 @@ def add_review(request):
             else: 
                 review["purchase_date"] = None
 
-            #url = "https://9bebcb01.eu-de.apigw.appdomain.cloud/api/review"  # API Cloud Function route
+        
             url = "https://us-south.functions.cloud.ibm.com/api/v1/namespaces/2b6849a1-8e21-482f-bf2f-f9a9fc3dd9b5/actions/dealership-package/post-review"
             json_payload = {"review": review}  # Create a JSON payload that contains the review data
 
@@ -291,6 +291,6 @@ def add_review(request):
             return redirect("djangoapp:dealer_details", dealer_id=dealer_id)
 
     else:
-        # If user isn't logged in, redirect to login page
+        # for user who isn't logged in, redirect to login page
         print("User must be authenticated before posting a review. Please log in.")
         return redirect("/djangoapp/login")

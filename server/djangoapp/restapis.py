@@ -149,7 +149,22 @@ def get_dealer_reviews_from_cf(url, dealer_id):
     print("about to return results from get_dealer_reviews_from_cf\n")
     return results
 
-# Used to retrieve the name oa a dealer when you know the id for a dealer
+# returns the deaker object with full information on a particular dealer
+# as idientified by numeric dealer_id value
+def get_dealer_by_id(url, dealer_id):
+    # Call get_request with the dealer_id param
+    json_result = get_request(url, dealerId=dealer_id)
+
+    # Create a CarDealer object from response
+    dealer = json_result["entries"][0]
+    dealer_obj = CarDealer(address=dealer["address"], city=dealer["city"], full_name=dealer["full_name"],
+                           id=dealer["id"], lat=dealer["lat"], long=dealer["long"],
+                           short_name=dealer["short_name"],
+                           st=dealer["st"], state=dealer["state"], zip=dealer["zip"])
+
+    return dealer_obj
+
+# returns the name oa a dealer based on the numeric id of thee dealer
 # Requires the dealer_id parameter with only a single value
 def get_dealer_name_by_id_from_cf(url, dealerId):
     # Call get_request with the dealer_id param
@@ -168,6 +183,8 @@ def get_dealer_name_by_id_from_cf(url, dealerId):
     return dealer_obj
     """
     return dealer
+
+
 
 
 # Create an `analyze_review_sentiments` method to call Watson NLU and analyze text
