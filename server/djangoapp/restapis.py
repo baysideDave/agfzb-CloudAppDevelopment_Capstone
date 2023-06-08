@@ -156,11 +156,14 @@ def get_dealer_by_id(url, dealer_id):
     json_result = get_request(url, dealerId=dealer_id)
 
     # Create a CarDealer object from response
-    dealer = json_result["entries"][0]
+    #dealer = json_result["entries"][0]
+    dealer = json_result[0]
+    # I only have "st" in my car dealer model, I may also need "state"
     dealer_obj = CarDealer(address=dealer["address"], city=dealer["city"], full_name=dealer["full_name"],
                            id=dealer["id"], lat=dealer["lat"], long=dealer["long"],
                            short_name=dealer["short_name"],
-                           st=dealer["st"], state=dealer["state"], zip=dealer["zip"])
+                           #st=dealer["st"], state=dealer["state"], zip=dealer["zip"])
+                           st=dealer["st"], zip=dealer["zip"])
 
     return dealer_obj
 
