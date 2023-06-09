@@ -26,8 +26,9 @@ def get_request(url, **kwargs):
 
 # This function is used make HTTP POST requests
 def post_request(url, json_payload, **kwargs):
-    print(f"POST to {url}")
+    print(f"In post_request - POST to {url}")
     try:
+        print("post_request - json_payload is: ", json_payload)
         response = requests.post(url, params=kwargs, json=json_payload)
     except:
         print("ERROR occurred while making POST request. ")

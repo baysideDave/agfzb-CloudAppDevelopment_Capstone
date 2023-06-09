@@ -247,7 +247,8 @@ def add_review(request, dealer_id):
     if request.user.is_authenticated:
         # GET request renders the page with the form for filling out a review
         if request.method == "GET":
-            dealer_id = 7
+            print("in add_review, get request dealer_id = ",dealer_id)
+            #dealer_id = 7
             url = "https://us-south.functions.appdomain.cloud/api/v1/web/2b6849a1-8e21-482f-bf2f-f9a9fc3dd9b5/dealership-package/dealership"
 
             # Get dealer details from the API
@@ -259,6 +260,7 @@ def add_review(request, dealer_id):
 
         # POST request posts the content in the review submission form to the Cloudant DB using the post_review Cloud Function
         if request.method == "POST":
+            print("in add_review, post request")
             form = request.POST
             review = dict()
             review["name"] = f"{request.user.first_name} {request.user.last_name}"
