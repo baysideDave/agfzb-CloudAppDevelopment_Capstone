@@ -281,6 +281,7 @@ def add_review(request, dealer_id):
             else: 
                 review["purchase_date"] = None
 
+            print("in views.py add_review - structure is: ", review)
         
             url = "https://us-south.functions.cloud.ibm.com/api/v1/namespaces/2b6849a1-8e21-482f-bf2f-f9a9fc3dd9b5/actions/dealership-package/post-review"
             print("in add_review - url = ", url)
