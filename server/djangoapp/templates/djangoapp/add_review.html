@@ -15,7 +15,7 @@
             <h2>Input a New Review</h2>
             <h3>{{dealer.full_name}}</h3>
             <form action="/djangoapp/dealer/{{dealer.id}}/add_review/" method="post">
-            <form action="/djangoapp/dealer/7/add_review/" method="post">
+            <!--<form action="/djangoapp/dealer/7/add_review/" method="post">-->
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="content"><b>Enter the review content:</b></label>
@@ -25,11 +25,12 @@
                     <input class="form-check-input" type="checkbox" name="purchasecheck" id="purchasecheck">
                     <label for="purchasecheck">Did you purchase the car? </label>
                 </div>
+
                 <div class="form-group">
                     <label for="car">Select your car:</label>
                     <select name="car" id="car" class="form-select">
                         {% for car in cars %}
-                            <option selected value={{car.id}}>{{car.car_make.name}} {{car.name}} {{ car.year }}</option>
+                            <option selected value={{car.id}}>{{car.carmake.name}}-{{car.name}}-{{car.year|date:"Y"}}</option>
                         {% endfor %}
                     </select>
                 </div>

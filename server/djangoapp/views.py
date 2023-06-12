@@ -257,6 +257,8 @@ def add_review(request, dealer_id):
                 "cars": CarModel.objects.all(),
                 "dealer": get_dealer_by_id(url, dealer_id=dealer_id),
             }
+            car_temp = CarModel.objects.all()
+            print("in views.py add_review get",car_temp,"\n" )
             return render(request, 'djangoapp/add_review.html', context)
 
         # POST request posts the content in the review submission form to the Cloudant DB using the post_review Cloud Function
@@ -271,9 +273,11 @@ def add_review(request, dealer_id):
             if review["purchase"]:
                 review["purchase_date"] = datetime.strptime(form.get("purchasedate"), "%m/%d/%Y").isoformat()
             car = CarModel.objects.get(pk=form["car"])
-            review["car_make"] = car.carmake
+            review["car_make"] = car.carmake.name
             review["car_model"] = car.name
             review["car_year"] = car.year
+            temp_car_make = review["car_make"]
+            print("in views.py add_review post - car_make = ", temp_car_make, "\n")
             
             # If the user bought the car, get the purchase date
             if form.get("purchasecheck"):
@@ -281,12 +285,12 @@ def add_review(request, dealer_id):
             else: 
                 review["purchase_date"] = None
 
-            print("in views.py add_review - structure is: ", review)
+            print("in views.py add_review post - structure is: ", review)
         
             url = "https://us-south.functions.cloud.ibm.com/api/v1/namespaces/2b6849a1-8e21-482f-bf2f-f9a9fc3dd9b5/actions/dealership-package/post-review"
             print("in add_review - url = ", url)
             json_payload = {"review": review}  # Create a JSON payload that contains the review data
-            print
+            print("in views.py add_review post jason_payload = ", json_payload, "\n")
             # Performing a POST request with the review
             result = post_request(url, json_payload, dealerId=dealer_id)
             if int(result.status_code) == 200:
