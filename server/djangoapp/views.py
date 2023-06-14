@@ -275,13 +275,17 @@ def add_review(request, dealer_id):
             car = CarModel.objects.get(pk=form["car"])
             review["car_make"] = car.carmake.name
             review["car_model"] = car.name
-            review["car_year"] = car.year
+            #review["car_year"] = car.year
+            #line below temp cpde for debugging
+            review["car_year"] = 2023
             temp_car_make = review["car_make"]
             print("in views.py add_review post - car_make = ", temp_car_make, "\n")
             
             # If the user bought the car, get the purchase date
             if form.get("purchasecheck"):
-                review["purchase_date"] = datetime.strptime(form.get("purchasedate"), "%m/%d/%Y").isoformat()
+                #review["purchase_date"] = datetime.strptime(form.get("purchasedate"), "%m/%d/%Y").isoformat()
+                # line below is temp for testing
+                review["purchase_date"] = "03/27/2023"
             else: 
                 review["purchase_date"] = None
 
@@ -292,7 +296,7 @@ def add_review(request, dealer_id):
             json_payload = {"review": review}  # Create a JSON payload that contains the review data
             print("in views.py add_review post jason_payload = ", json_payload, "\n")
             # Performing a POST request with the review
-            result = post_request(url, json=json_payload, dealerId=dealer_id)
+            result = post_request(url, json_payload, dealerId=dealer_id)
             if int(result.status_code) == 200:
                 print("in add+review - Review posted successfully.")
 

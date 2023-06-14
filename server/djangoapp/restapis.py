@@ -25,6 +25,7 @@ def get_request(url, **kwargs):
     return json_data
 
 # This function is used make HTTP POST requests
+""" old on 6-14-2023
 def post_request(url, json_payload, **kwargs):
     print(f"In post_request - POST to {url} /n")
     print(f"In post request - json payload is {json_payload} /n")
@@ -37,7 +38,19 @@ def post_request(url, json_payload, **kwargs):
     print("With status {} ".format(status_code))
 
     return response
-
+"""
+def post_request(url, json_payload, **kwargs):
+    print("in restapis.py post_request jason payload is ",json_payload,"\n")
+    print("POST from {} ".format(url))
+    #try:
+    response = requests.post(url, params=kwargs, json=json_payload)
+    status_code = response.status_code
+    print("in restapi post_request - status code is {} \n".format(status_code))
+    json_data = json.loads(response.text)
+    print(json_data)
+    return json_data
+    #except:
+        #print("Network exception occurred")
 """
 # Create a get_dealers_from_cf method to get dealers from a cloud function
 # def get_dealers_from_cf(url, **kwargs):
