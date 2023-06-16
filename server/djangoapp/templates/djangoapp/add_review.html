@@ -88,8 +88,7 @@
 
         <!--form code below-->
         <div class="container">
-            <h2>Input a New Review</h2>
-            <h3>{{dealer.full_name}}</h3>
+            <h2>Add a review about <b>{{dealer.full_name}}</b></h2>
             <form action="/djangoapp/dealer/{{dealer.id}}/add_review/" method="post">
             <!--<form action="/djangoapp/dealer/7/add_review/" method="post">-->
                 {% csrf_token %}
@@ -99,20 +98,20 @@
                 </div>
                 <div class="form-group form-check">
                     <input class="form-check-input" type="checkbox" name="purchasecheck" id="purchasecheck">
-                    <label for="purchasecheck">Did you purchase the car? </label>
+                    <label for="purchasecheck">has purchased the car from {{dealer.full_name}}? <span style="color: #909090;">(select purchased car information below if checked)</span></label>
                 </div>
 
                 <div class="form-group">
-                    <label for="car">Select your car:</label>
+                    <label for="car">Select your car (model-make-year):</label>
                     <select name="car" id="car" class="form-select">
                         {% for car in cars %}
-                            <option selected value={{car.id}}>{{car.carmake.name}}-{{car.name}}-{{car.year|date:"Y"}}</option>
+                            <option selected value={{car.id}}>{{car.name}}-{{car.carmake.name}}-{{car.year|date:"Y"}}</option>
                         {% endfor %}
                     </select>
                 </div>
                 <div class="form-group" data-provide="datepicker">
                     <label for="purchasedate">Select your purchase date (mm/dd/yyyy):</label>
-                    <input class="date-own form-control" type="text" name="purchasedate" id="purchasedate">
+                    <input class="date-own form-control" type="datepicker" name="purchasedate" id="purchasedate">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
