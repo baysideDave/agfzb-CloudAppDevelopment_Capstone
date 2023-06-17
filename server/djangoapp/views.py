@@ -270,7 +270,9 @@ def add_review(request, dealer_id):
             review["dealership"] = dealer_id
             review["review"] = form["content"]
             review["purchase"] = form.get("purchasecheck")
+            #xyz = datetime.strptime(form.get("purchasedate"), "%m/%d/%Y").isoformat()
             if review["purchase"]:
+                #print("in views.py add_review type of date = ",type(xyz),"  ", xyz, "\n")
                 review["purchase_date"] = datetime.strptime(form.get("purchasedate"), "%m/%d/%Y").isoformat()
             car = CarModel.objects.get(pk=form["car"])
             review["car_make"] = car.carmake.name
@@ -283,9 +285,9 @@ def add_review(request, dealer_id):
             
             # If the user bought the car, get the purchase date
             if form.get("purchasecheck"):
-                #review["purchase_date"] = datetime.strptime(form.get("purchasedate"), "%m/%d/%Y").isoformat()
+                review["purchase_date"] = datetime.strptime(form.get("purchasedate"), "%m/%d/%Y").isoformat()
                 # line below is temp for testing
-                review["purchase_date"] = "03/27/2023"
+                #review["purchase_date"] = "03/27/2023"
             else: 
                 review["purchase_date"] = None
 
