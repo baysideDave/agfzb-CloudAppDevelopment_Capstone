@@ -125,3 +125,8 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(STATIC_ROOT, 'media')
 MEDIA_URL = '/media/'
+
+ALLOWED_HOSTS = ['localhost', 'localhost:8000', 'https://b5254c9b-4482-4a0f-9d48-488e8baf9891-bluemix.cloudantnosqldb.appdomain.cloud', 'https://bhcadave-8000.theiadocker-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai']
+
+
+CSRF_TRUSTED_ORIGINS = ['https://bhcadave-8000.theiadocker-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai']
