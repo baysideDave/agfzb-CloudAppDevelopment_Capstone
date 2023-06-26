@@ -142,59 +142,9 @@ def get_dealerships(request):
         # return HttpResponse(dealer_names)
         
         return render(request, 'djangoapp/index.html', context)
-        
-"""
-    def get_dealerships(request):
-        context = {}
-        if request.method == "GET":
-            return render(request, 'djangoapp/index.html', context)
-"""
-"""
-def get_dealerships(request):
-    if request.method == "GET":
-        #url = "your-cloud-function-domain/dealerships/dealer-get"
-        #  mine  url = "https://us-south.functions.appdomain.cloud/api/v1/web/2b6849a1-8e21-482f-bf2f-f9a9fc3dd9b5/dealership-package/get-dealership"
-        url = "https://us-south.functions.appdomain.cloud/api/v1/web/7ccc880f-504c-4f24-a816-b01352454616/dealership-package/get-dealership"
-        # Get dealers from the URL
-        dealerships = get_dealers_from_cf(url)
-        # Concat all dealer's short name
-        dealer_names = ' '.join([dealer.short_name for dealer in dealerships])
-        # Return a list of dealer short name
-        return HttpResponse(dealer_names)
-"""
-"""
-def get_dealerships(request):
-    if request.method == "GET":
-        context = {}
 
-        state = request.GET.get("st")
-        dealerId = request.GET.get("dealerId")
-        #their url
-        url = "https://us-south.functions.appdomain.cloud/api/v1/web/7ccc880f-504c-4f24-a816-b01352454616/dealership-package/get-dealership"
 
-        # url below is mine
-        #url =  "https://us-south.functions.appdomain.cloud/api/v1/web/2b6849a1-8e21-482f-bf2f-f9a9fc3dd9b5/dealership-package/get-dealership"
 
-        try:
-            if state:
-                dealerships = get_dealers_from_cf(url, st=state)
-            elif dealerId:
-                dealerships = get_dealers_from_cf(url, dealerId=dealerId)
-            else:
-                dealerships = get_dealers_from_cf(url)
-        except Exception as e:
-            # Handle the error and set dealerships to an empty list or display an error message
-            dealerships = []
-            context["error"] = f"An error occurred while fetching dealerships: {e}"
-            #my code
-            dealer_names = ' '.join([dealer.short_name for dealer in dealerships])
-        context["dealership_list"] = dealerships
-        print(context["dealership_list"])
-        
-        
-        return render(request, "djangoapp/index.html", context=context)
-
-"""
 
 #To be done
 
@@ -301,10 +251,12 @@ def add_review(request, dealer_id):
             print("in views.py add_review post jason_payload = ", json_payload, "\n")
             # Performing a POST request with the review
             result = post_request(url, json_payload, dealerId=dealer_id)
+            """ temp disabling due to problems with post request
             if int(result.status_code) == 200:
                 print("in add+review - Review posted successfully.")
 
             # After posting the review the user is redirected back to the dealer details page
+            """
             return redirect("djangoapp:dealer_details", dealer_id=dealer_id)
 
     else:
