@@ -10,8 +10,8 @@ from ibm_watson.natural_language_understanding_v1 import Features, SentimentOpti
 
 # this function is used to make get requests
 def get_request(url, **kwargs):
-    print(kwargs)
-    print("GET from {} ".format(url))
+    #print(kwargs)
+    #print("GET from {} ".format(url))
     try:
         # Call get method of requests library with URL and parameters
         response = requests.get(url, headers={'Content-Type': 'application/json'},
@@ -20,7 +20,7 @@ def get_request(url, **kwargs):
         # If any error occurs
         print("Network exception occurred")
     status_code = response.status_code
-    print("With status {} ".format(status_code))
+    #print("With status {} ".format(status_code))
     json_data = json.loads(response.text)
     return json_data
 
@@ -85,10 +85,10 @@ def get_dealer_reviews_from_cf(url, dealer_id):
     if "data" in json_result:
         
         reviews = json_result["data"]["docs"]
-        print("reviews = ", reviews)
+        #print("reviews = ", reviews)
         # For each review object
         for review in reviews:
-            print("in reviews loop")
+            #print("in reviews loop")
             review_obj = DealerReview(
                 dealership=review["dealership"],
                 name=review["name"],
@@ -101,11 +101,11 @@ def get_dealer_reviews_from_cf(url, dealer_id):
                 sentiment=analyze_review_sentiments(review["review"]),
                 id=review['id']
                 )
-            print("review object = ", review_obj)
+            #print("review object = ", review_obj)
             results.append(review_obj)
-            pprint(results)
+            #pprint(results)
 
-    print("about to return results from get_dealer_reviews_from_cf\n")
+    #print("about to return results from get_dealer_reviews_from_cf\n")
     return results
 
 # returns the deaker object with full information on a particular dealer
@@ -134,7 +134,7 @@ def get_dealer_name_by_id_from_cf(url, dealerId):
 
     # Create a CarDealer object from response
     dealer = json_result[0]["full_name"]
-    print("in get_dealer_name_by_id_from_cf, full_name = ", dealer)
+    #print("in get_dealer_name_by_id_from_cf, full_name = ", dealer)
 
     return dealer
 
@@ -160,14 +160,14 @@ def analyze_review_sentiments(review_text):
     try:
         response = nlu.analyze(text=review_text, features=Features(
             sentiment=SentimentOptions())).get_result()
-        print(json.dumps(response))
+        #print(json.dumps(response))
 
         sentiment_label = response["sentiment"]["document"]["label"]
     except:
-        print("text is too short for meaningful analysis, so we will sentiment value to 'neutral' ")
+        #print("text is too short for meaningful analysis, so we will sentiment value to 'neutral' ")
         sentiment_label = "neutral"
 
 
-    print(sentiment_label) # debug
+    #print(sentiment_label) # debug
 
     return sentiment_label

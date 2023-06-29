@@ -74,7 +74,7 @@ def login_request(request):
 # 
 def logout_request(request):
     # Get the user object based on session id in request
-    print("Log out the user `{}`".format(request.user.username))
+    #print("Log out the user `{}`".format(request.user.username))
     # Logout user in the request
     logout(request)
     # Redirect user back to index page
@@ -131,7 +131,7 @@ def get_dealerships(request):
         url = "https://us-south.functions.appdomain.cloud/api/v1/web/2b6849a1-8e21-482f-bf2f-f9a9fc3dd9b5/dealership-package/dealership"
         # Get the dealers calling a function that will use a web action
         dealerships = get_dealers_from_cf(url)
-        print("dealers form cf = ", dealerships[2])
+        #print("dealers form cf = ", dealerships[2])
         # add the returned data to context
         context["dealership_list"] = dealerships
 
@@ -164,7 +164,7 @@ def get_dealer_details(request, dealer_id):
 
     # getting the dealer name
     dealer_name = get_dealer_name_by_id_from_cf(dealer_name_url, dealerId=dealer_id)
-    print("dealer name is: ", dealer_name)
+    #print("dealer name is: ", dealer_name)
     context["dealer_name"] = dealer_name
 
     # dsg print("dealer is ",dealer_id)
@@ -192,13 +192,13 @@ def get_dealer_details(request, dealer_id):
 # View to submit a new review
 #def add_review(request, dealer_id):
 def add_review(request, dealer_id):
-    print("in add_review dealer_id = ",dealer_id)
+    print("in views.py add_review dealer_id = ",dealer_id,"\n")
     context={}
     # User must be logged in before posting a review
     if request.user.is_authenticated:
         # GET request renders the page with the form for filling out a review
         if request.method == "GET":
-            print("in add_review, get request dealer_id = ",dealer_id)
+            print("in views.py add_review, get request dealer_id = ",dealer_id,"\n")
             #dealer_id = 7
             url = "https://us-south.functions.appdomain.cloud/api/v1/web/2b6849a1-8e21-482f-bf2f-f9a9fc3dd9b5/dealership-package/dealership"
                   
@@ -209,12 +209,12 @@ def add_review(request, dealer_id):
                 "dealer": get_dealer_by_id(url, dealer_id=dealer_id),
             }
             car_temp = CarModel.objects.all()
-            print("in views.py add_review get",car_temp,"\n" )
+            #print("in views.py add_review get",car_temp,"\n" )
             return render(request, 'djangoapp/add_review.html', context)
 
         # POST request posts the content in the review submission form to the Cloudant DB using the post_review Cloud Function
         if request.method == "POST":
-            print("in add_review, post request")
+            print("in views.py add_review, post request \n")
             form = request.POST
             review = dict()
             review["name"] = f"{request.user.first_name} {request.user.last_name}"
@@ -244,9 +244,8 @@ def add_review(request, dealer_id):
 
             print("in views.py add_review post - structure is: ", review, "\n")
         
-            #url = "https://us-south.functions.cloud.ibm.com/api/v1/namespaces/2b6849a1-8e21-482f-bf2f-f9a9fc3dd9b5/actions/dealership-package/post-review"
             url = "https://us-south.functions.cloud.ibm.com/api/v1/namespaces/2b6849a1-8e21-482f-bf2f-f9a9fc3dd9b5/actions/dealership-package/review-post"
-            print("in add_review - url = ", url)
+            print("in views.py add_review - url = ", url,"\n")
             json_payload = {"review": review}  # Create a JSON payload that contains the review data
             print("in views.py add_review post jason_payload = ", json_payload, "\n")
             # Performing a POST request with the review
@@ -261,5 +260,5 @@ def add_review(request, dealer_id):
 
     else:
         # for user who isn't logged in, redirect to login page
-        print("redirecting user to login page.")
+        print("in views.py add_review redirecting user to login page.\n")
         return redirect("/djangoapp/login")
