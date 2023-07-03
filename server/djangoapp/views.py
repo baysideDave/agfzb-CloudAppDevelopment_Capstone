@@ -244,7 +244,7 @@ def add_review(request, dealer_id):
 
             print("in views.py add_review post - structure is: ", review, "\n")
         
-            url = "https://us-south.functions.cloud.ibm.com/api/v1/namespaces/2b6849a1-8e21-482f-bf2f-f9a9fc3dd9b5/actions/dealership-package/review-post"
+            url = "https://us-south.functions.appdomain.cloud/api/v1/web/2b6849a1-8e21-482f-bf2f-f9a9fc3dd9b5/dealership-package/review-post"
             print("in views.py add_review - url = ", url,"\n")
             json_payload = {"review": review}  # Create a JSON payload that contains the review data
             print("in views.py add_review post jason_payload = ", json_payload, "\n")
