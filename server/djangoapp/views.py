@@ -221,6 +221,7 @@ def add_review(request, dealer_id):
             review["dealership"] = dealer_id
             review["review"] = form["content"]
             review["purchase"] = form.get("purchasecheck")
+            review["id"] = 777
             #xyz = datetime.strptime(form.get("purchasedate"), "%m/%d/%Y").isoformat()
             if review["purchase"]:
                 #print("in views.py add_review type of date = ",type(xyz),"  ", xyz, "\n")
@@ -250,12 +251,13 @@ def add_review(request, dealer_id):
             print("in views.py add_review post jason_payload = ", json_payload, "\n")
             # Performing a POST request with the review
             result = post_request(url, json_payload, dealerId=dealer_id)
-            """ temp disabling due to problems with post request
-            if int(result.status_code) == 200:
-                print("in add+review - Review posted successfully.")
+            print("in view.py add_review, about to pprint result structure\n")
+            pprint(result)
+
+            if (result["data"]["ok"]):
+                print("in view.py add_review - Review posted successfully.\n")
 
             # After posting the review the user is redirected back to the dealer details page
-            """
             return redirect("djangoapp:dealer_details", dealer_id=dealer_id)
 
     else:
