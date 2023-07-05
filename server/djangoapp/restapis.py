@@ -85,7 +85,8 @@ def get_dealer_reviews_from_cf(url, dealer_id):
     if "data" in json_result:
         
         reviews = json_result["data"]["docs"]
-        #print("reviews = ", reviews)
+        print("in restapis - get_dealer_reviews_from_cf reviews dump\n")
+        pprint(reviews)
         # For each review object
         for review in reviews:
             #print("in reviews loop")
