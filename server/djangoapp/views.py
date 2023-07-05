@@ -220,7 +220,10 @@ def add_review(request, dealer_id):
             review["name"] = f"{request.user.first_name} {request.user.last_name}"
             review["dealership"] = dealer_id
             review["review"] = form["content"]
-            review["purchase"] = form.get("purchasecheck")
+            if(form.get("purchasecheck")=="on"):
+                review["purchase"] = True
+            else:
+                review["purchase"] = False
             review["id"] = 777
             #xyz = datetime.strptime(form.get("purchasedate"), "%m/%d/%Y").isoformat()
             if review["purchase"]:
