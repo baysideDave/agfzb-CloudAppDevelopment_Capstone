@@ -220,31 +220,22 @@ def add_review(request, dealer_id):
             review["name"] = f"{request.user.first_name} {request.user.last_name}"
             review["dealership"] = dealer_id
             review["review"] = form["content"]
+            review["id"] = 777 # value is not used for anything, and cloudant takes duplicates
+            # find out if this is going to be the purchase case, or
+            # a no purchase case and set a boolean
             if(form.get("purchasecheck")=="on"):
                 review["purchase"] = True
             else:
                 review["purchase"] = False
-            review["id"] = 777
+
             #xyz = datetime.strptime(form.get("purchasedate"), "%m/%d/%Y").isoformat()
             if review["purchase"]:
-                #print("in views.py add_review type of date = ",type(xyz),"  ", xyz, "\n")
                 review["purchase_date"] = datetime.strptime(form.get("purchasedate"), "%m/%d/%Y").isoformat()
-            car = CarModel.objects.get(pk=form["car"])
-            review["car_make"] = car.carmake.name
-            review["car_model"] = car.name
-            #review["car_year"] = car.year
-            #line below temp cpde for debugging
-            review["car_year"] = 2023
-            temp_car_make = review["car_make"]
-            print("in views.py add_review post - car_make = ", temp_car_make, "\n")
-            
-            # If the user bought the car, get the purchase date
-            if form.get("purchasecheck"):
+                car = CarModel.objects.get(pk=form["car"])
+                review["car_make"] = car.carmake.name
+                review["car_model"] = car.name
+                review["car_year"] = car.year.strftime("%Y")
                 review["purchase_date"] = datetime.strptime(form.get("purchasedate"), "%m/%d/%Y").isoformat()
-                # line below is temp for testing
-                #review["purchase_date"] = "03/27/2023"
-            else: 
-                review["purchase_date"] = None
 
             print("in views.py add_review post - structure is: ", review, "\n")
         

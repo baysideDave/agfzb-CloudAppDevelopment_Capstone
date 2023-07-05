@@ -89,18 +89,33 @@ def get_dealer_reviews_from_cf(url, dealer_id):
         # For each review object
         for review in reviews:
             #print("in reviews loop")
-            review_obj = DealerReview(
-                dealership=review["dealership"],
-                name=review["name"],
-                purchase=review["purchase"],
-                review=review["review"],
-                purchase_date=review["purchase_date"],
-                car_make=review["car_make"],
-                car_model=review["car_model"],
-                car_year=review["car_year"],
-                sentiment=analyze_review_sentiments(review["review"]),
-                id=review['id']
-                )
+            if(review["purchase"]=="true"):
+                review_obj = DealerReview(
+                    dealership=review["dealership"],
+                    name=review["name"],
+                    purchase=review["purchase"],
+                    review=review["review"],
+                    purchase_date=review["purchase_date"],
+                    car_make=review["car_make"],
+                    car_model=review["car_model"],
+                    car_year=review["car_year"],
+                    sentiment=analyze_review_sentiments(review["review"]),
+                    id=review['id'] 
+                    )
+            else:
+                review_obj = DealerReview(
+                    dealership=review["dealership"],
+                    name=review["name"],
+                    purchase=review["purchase"],
+                    review=review["review"],
+                    purchase_date=review["purchase_date"],
+                    car_make="not applicable",
+                    car_model="not applicable",
+                    car_year="not applicable",
+                    sentiment=analyze_review_sentiments(review["review"]),
+                    id=review['id'] 
+                    )
+
             #print("review object = ", review_obj)
             results.append(review_obj)
             #pprint(results)
