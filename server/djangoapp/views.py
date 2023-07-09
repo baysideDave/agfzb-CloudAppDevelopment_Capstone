@@ -185,12 +185,12 @@ def get_dealer_details(request, dealer_id):
     return render(request, 'djangoapp/dealer_details.html', context)
 
 
-# Create a `add_review` view to submit a review
-# def add_review(request, dealer_id):
-# ...
-
-# View to submit a new review
-#def add_review(request, dealer_id):
+# add_review
+#
+# used to submit a new review, relies both on cloudant database and local database
+# Treats a GET request, which puts up a new form, differently than a
+# POST request which handles the users responses on the form 
+#
 def add_review(request, dealer_id):
     print("in views.py add_review dealer_id = ",dealer_id,"\n")
     context={}
@@ -199,17 +199,18 @@ def add_review(request, dealer_id):
         # GET request renders the page with the form for filling out a review
         if request.method == "GET":
             print("in views.py add_review, get request dealer_id = ",dealer_id,"\n")
-            #dealer_id = 7
             url = "https://us-south.functions.appdomain.cloud/api/v1/web/2b6849a1-8e21-482f-bf2f-f9a9fc3dd9b5/dealership-package/dealership"
                   
 
-            # Get dealer details from the API
+            # Get car dealer details
+
             context = {
                 "cars": CarModel.objects.all(),
                 "dealer": get_dealer_by_id(url, dealer_id=dealer_id),
             }
             car_temp = CarModel.objects.all()
-            #print("in views.py add_review get",car_temp,"\n" )
+            #print("in views.py add_review get - dumping CarModel.objects.all() \n" )
+            #pprint(car_temp)
             return render(request, 'djangoapp/add_review.html', context)
 
         # POST request posts the content in the review submission form to the Cloudant DB using the post_review Cloud Function
@@ -221,16 +222,16 @@ def add_review(request, dealer_id):
             review["dealership"] = dealer_id
             review["review"] = form["content"]
             review["id"] = 777 # value is not used for anything, and cloudant takes duplicates
-            # find out if this is going to be the purchase case, or
+
+            # find out if this is going to be a purchase case, or
             # a no purchase case and set a boolean
             if(form.get("purchasecheck")=="on"):
                 review["purchase"] = True
             else:
                 review["purchase"] = False
 
-            #xyz = datetime.strptime(form.get("purchasedate"), "%m/%d/%Y").isoformat()
             if review["purchase"]:
-                review["purchase_date"] = datetime.strptime(form.get("purchasedate"), "%m/%d/%Y").isoformat()
+                #review["purchase_date"] = datetime.strptime(form.get("purchasedate"), "%m/%d/%Y").isoformat()
                 car = CarModel.objects.get(pk=form["car"])
                 review["car_make"] = car.carmake.name
                 review["car_model"] = car.name
