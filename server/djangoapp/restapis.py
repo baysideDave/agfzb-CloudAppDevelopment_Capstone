@@ -163,9 +163,12 @@ def get_dealer_name_by_id_from_cf(url, dealerId):
 # - Get the returned sentiment label such as Positive or Negative
 def analyze_review_sentiments(review_text):
 
-    #using os.environmental values
-    api_key = os.environ['NLUKEY']
-    url = os.environ['NLU_URL']
+    #not using os.environmental values with docker version
+    #api_key = os.environ['NLUKEY']
+    #url = os.environ['NLU_URL']
+    api_key = 'Q6IXbvxID5wGi1luZPYYNglcc5_Opdy5bBkQUzq1z8xb'
+    url = 'https://api.us-south.natural-language-understanding.watson.cloud.ibm.com/instances/5a357be0-0b26-42cb-94f2-6024286a5e18'
+
     version = '2021-08-01'
     authenticator = IAMAuthenticator(api_key)
     nlu = NaturalLanguageUnderstandingV1(
