@@ -46,7 +46,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -126,7 +126,11 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(STATIC_ROOT, 'media')
 MEDIA_URL = '/media/'
 
-ALLOWED_HOSTS = ['localhost', 'localhost:8000', 'https://b5254c9b-4482-4a0f-9d48-488e8baf9891-bluemix.cloudantnosqldb.appdomain.cloud', 'https://bhcadave-8000.theiadocker-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai']
+ALLOWED_HOSTS = ['localhost', 
+'localhost:8000', 'https://b5254c9b-4482-4a0f-9d48-488e8baf9891-bluemix.cloudantnosqldb.appdomain.cloud', 
+'https://bhcadave-8000.theiadocker-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai']
 
 
-CSRF_TRUSTED_ORIGINS = ['https://bhcadave-8000.theiadocker-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai','https://bhcadave-8000.theiadocker-3-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/djangoapp/']
+CSRF_TRUSTED_ORIGINS = ['https://bhcadave-8000.theiadocker-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai',
+'https://bhcadave-8000.theiadocker-2-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai',
+'https://bhcadave-8000.theiadocker-3-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai']
