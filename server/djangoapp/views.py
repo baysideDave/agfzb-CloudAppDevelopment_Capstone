@@ -58,14 +58,14 @@ def login_request(request):
         if user is not None:
             # If user is valid, call login method to do actual login
             login(request, user)
-            return render(request, 'djangoapp/index.html', context)
+            #return render(request, 'djangoapp/index.html', context)
+            return redirect('djangoapp:index')
         else:
             #the bad case - tell the user input was bad on the return to login page
             context["message"]="The Username or password you entered was incorrect - Please try again"
             return render(request, 'djangoapp/index.html', context)
     else:
         return render(request, 'djangoapp/index.html', context)
-    
 
 
 # `logout_request` this view is used to handle sign a out request
@@ -78,8 +78,8 @@ def logout_request(request):
     # Logout user in the request
     logout(request)
     # Redirect user back to index page
-    return redirect('/djangoapp')
-
+    return redirect('djangoapp:index')
+    #return render(request, 'djangoapp/index.html', context)
     
 
 # `registration_request` view  - handles a sign up request
